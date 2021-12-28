@@ -18,3 +18,65 @@ let arr4: any[] = [{}, '']
 属于数组的一种,定义数组中具体的类型
  */
 let tuple: [number, string, object] = [2, '2', {}]
+
+//enum
+
+enum Color {
+  red,
+  blue,
+  green = 5,
+  pink
+}
+
+/*
+{
+    "0": "red",
+    "1": "blue",
+    "5": "green",
+    "6": "pink",
+    "red": 0,
+    "blue": 1,
+    "green": 5,
+    "pink": 6
+}
+*/
+
+const c: Color = Color['pink']
+const c2: string = Color[5]
+
+enum Msg {
+  error = '错误',
+  info = '提示',
+  '警告' = 'warning'
+}
+/*
+{
+    "error": "错误",
+    "info": "提示",
+    "警告": "warning"
+}
+*/
+
+// var oBox: any = document.getElementById('box')
+// oBox.style.color = 'red'
+let person: any = {}
+
+//undefined 和 null,
+//是其他数据类型（ never 类型）的子类型
+let num1: number | undefined | null
+num1 = 123
+num1 = undefined
+num1 = null
+
+let num2: never
+
+function run(): void {
+  console.log('run')
+}
+run()
+
+function run2(): never {
+  throw new Error()
+}
+
+run2()
