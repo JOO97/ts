@@ -1,3 +1,4 @@
+//1 类型
 /**
  * 布尔类型（boolean）、数字类型(number)、字符串类型(string)、数组类型(array)、元祖类型(tuple)、枚举类型(enum)、任意类型(any)、null 和 undefined、void类型、never类型
  */
@@ -75,8 +76,46 @@ function run(): void {
 }
 run()
 
-function run2(): never {
-  throw new Error()
-}
+// function run2(): never {
+//   throw new Error()
+// }
+// run2()
 
-run2()
+//2 func
+function getData(name: string = '1', id?: number): number {
+  return 1
+}
+getData('1')
+
+const getData2 = function (): number {
+  return 2
+}
+getData2()
+
+//剩余参数
+function fun(num1: number, ...result: Array<number>): number {
+  return num1
+}
+fun(1, 2, 3)
+
+//3 重载
+// function getInfo(name: string): string
+// function getInfo(age: number): number
+
+function getInfo(str: string | number): any {
+  if (typeof str === 'string') {
+    return `姓名：${str}`
+  } else if (typeof str === 'number') {
+    return str
+  }
+}
+getInfo(1)
+
+// function getInfo(name: string): string
+// function getInfo(name: string, age: number): string
+
+function getInfo2(name: string, age?: number): string {
+  if (age) return name + age
+  return name
+}
+getInfo2('1', 11)
