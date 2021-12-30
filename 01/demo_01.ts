@@ -4,6 +4,9 @@
  */
 
 let flag: boolean = false
+//"strictNullChecks": false
+// flag = undefined
+// flag = null
 
 let num: number
 num = 123
