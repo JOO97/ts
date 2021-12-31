@@ -127,3 +127,27 @@ var dog = new Dog('dog');
 dog.eat();
 var cow = new Cow('cow');
 cow.eat();
+//6 抽象类
+/**
+ * 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现
+abstract抽象方法只能放在抽象类里面
+抽象类和抽象方法用来定义标准
+ */
+var Plant = /** @class */ (function () {
+    function Plant(n) {
+        this.name = n;
+    }
+    return Plant;
+}());
+var Tree = /** @class */ (function (_super) {
+    __extends(Tree, _super);
+    function Tree(n) {
+        return _super.call(this, n) || this;
+    }
+    Tree.prototype.grow = function () {
+        console.log('grow func of Tree');
+    };
+    return Tree;
+}(Plant));
+var t = new Tree('tree');
+t.grow();

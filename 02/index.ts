@@ -114,3 +114,30 @@ const dog = new Dog('dog')
 dog.eat()
 const cow = new Cow('cow')
 cow.eat()
+
+//6 抽象类
+/**
+ * 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现
+abstract抽象方法只能放在抽象类里面
+抽象类和抽象方法用来定义标准
+ */
+abstract class Plant {
+  name: string
+  constructor(n: string) {
+    this.name = n
+  }
+  // abstract grow(): any {} 抽象方法只能出现在抽象类中
+  abstract grow(): any
+}
+
+class Tree extends Plant {
+  constructor(n: string) {
+    super(n)
+  }
+  grow(): void {
+    console.log('grow func of Tree')
+  }
+}
+
+const t = new Tree('tree')
+t.grow()
