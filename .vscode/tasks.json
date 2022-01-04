@@ -3,11 +3,11 @@
   "tasks": [
     {
       "type": "typescript",
-      "tsconfig": "04 generics/index.ts",
+      "tsconfig": "06/index.ts",
       "option": "watch",
       "problemMatcher": ["$tsc-watch"],
       "group": "build",
-      "label": "tsc: watch - 04 generics/index.ts"
+      "label": "tsc: watch - 06/index.ts"
     }
   ]
 }
