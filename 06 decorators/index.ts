@@ -58,7 +58,7 @@ class HttpReq3 {
 }
 
 const http3 = new HttpReq3('HttpReq3 baseUrl')
-http3.getData()
+// http3.getData()
 // console.log(http3.baseUrl) //logClass3 baseUrl
 
 //2 属性装饰器
@@ -73,7 +73,6 @@ function logClass4(params: any) {
 
 function logProperty(params: string) {
   return function (target: any, attr: string) {
-    console.log(params, target, attr)
     target[attr] = params
   }
 }
@@ -88,3 +87,78 @@ class httpReq4 {
 }
 
 //3 方法装饰器
+/**
+他会被应用到方法的属性描述符上，可以用来监视、修改或者替换方法，方法修饰符会在运行时传入以下三个参数：
+1对于静态成员来说是类的构造函数，对于实例对象来说是类的原型对象
+2成员的名字
+3成员的属性描述符
+ */
+//3.1 普通方法装饰器
+function logClass5(params: string) {
+  return function (target: any, attr: any, desc: any) {
+    // console.log(params, target, attr, desc)
+    target.url = params
+    target.run = function () {
+      // console.log('logClass5 run')
+    }
+    target.run2 = function () {
+      // console.log('logClass5 run')
+    }
+  }
+}
+
+class HttpReq5 {
+  public url: string | undefined
+  @logClass5('xxxx')
+  run() {
+    //优先
+    console.log('5 run')
+  }
+}
+
+const http5: any = new HttpReq5()
+// http5.run()
+// http5.run2()
+
+//3.2 修改方法参数
+function logClass6(params: string) {
+  return function (target: any, attr: any, desc: any) {
+    let method = desc.value
+    desc.value = function (...args: any[]) {
+      args = args.map((item) => item + 'xxx')
+      method.apply(this, args)
+    }
+  }
+}
+
+class HttpReq6 {
+  @logClass6('xxx')
+  get(...args: any) {
+    console.log('get', args)
+  }
+}
+const http6 = new HttpReq6()
+// http6.get(1, 2, 3)
+
+//4 方法参数装饰器
+function logParams(params: string) {
+  return function (target: any, fnName: any, paramIndex: any) {
+    console.log(target, fnName, paramIndex)
+    target.url = params
+  }
+}
+class HttpReq7 {
+  get(id: any, @logParams('xxxx') name: string) {
+    console.log('p', id, name)
+  }
+}
+
+const http7: any = new HttpReq7()
+http7.get(1, 'joo')
+console.log(http7.url)
+
+/*
+各类装饰器的执行顺序：
+属性装饰器 > 方法装饰器 > 方法参数装饰器 > 类装饰器
+如果有多个同一类别装饰器，从后往前执行
+*/
